@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — which pre-token protocol is worth farming next</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="mark">◈</div>
+    <div>
+      <h1>Token Launch Radar</h1>
+      <p class="tagline">Which protocol with no token recorded is worth farming next — ranked by what its launch would be worth.</p>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<main>
+  <section class="model" id="model">
+    <h2>How the radar ranks</h2>
+    <p><strong>Implied value = TVL × category multiple × growth factor × age factor.</strong>
+    Growth uses the snapshot's own 7-day TVL change, clamped to ±25%. Age uses how long
+    DefiLlama has tracked the protocol with no token recorded — a long pre-token record scores
+    higher. The multiples are set by category, never by name, and every figure comes from the
+    sealed snapshot. A protocol here <em>records no token</em>; that is DefiLlama's record, not
+    proof it has none.</p>
+    <p class="note">Snapshot: <span id="asof"></span> · Watchlist floor $50,000,000 TVL · Board covers all 40 watchlist protocols plus 158 early ones below the floor.</p>
+  </section>
+
+  <section class="controls">
+    <label>Search <input id="q" type="search" placeholder="protocol name or slug…"></label>
+    <label>Show
+      <select id="filter">
+        <option value="all">All 198 candidates</option>
+        <option value="watchlist">Watchlist only (40)</option>
+        <option value="below">Below the $50M floor (138)</option>
+        <option value="top">Top 25 by implied value</option>
+      </select>
+    </label>
+    <label>Category
+      <select id="category"><option value="">Every category</option></select>
+    </label>
+    <label>Sort by
+      <select id="sort">
+        <option value="value">Implied value</option>
+        <option value="tvl">TVL</option>
+        <option value="growth">7-day growth</option>
+        <option value="age">Age (days tracked)</option>
+      </select>
+    </label>
+    <span class="count" id="count"></span>
+  </section>
+
+  <section class="detail" id="detail" hidden></section>
+
+  <table class="board">
+    <thead>
+      <tr>
+        <th class="num">#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+        <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+        <th class="num">Implied value</th><th></th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <section class="live">
+    <h2>Already trading — set aside, not ranked</h2>
+    <p>These protocols record a token that already trades, so they are not launch candidates.
+    The 15 largest by market cap are listed here so the board's separation is visible.</p>
+    <ul id="live"></ul>
+  </section>
+
+  <footer>
+    <p>Data: DefiLlama public API, frozen snapshot. Implied values are this entry's own claim,
+    never make.fun's. Built for the make.fun token launch radar bounty.</p>
+  </footer>
+</main>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
